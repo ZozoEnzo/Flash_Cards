@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entrainement complet{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/training.css') }}">
+  <style>
+      .card__face--front {
+          padding-top: 1rem;
+          background: linear-gradient(#141e30, #243b55);
+      }
+      .card-body {
+          margin-top: 3rem;
+      }
+  </style>
+{% endblock %}
+
+{% block body %}
+
+  <div class="container text-center center-block mt-3">
+    {% for card in cards %}
+      <div class="{{ card.id }}{% if loop.index != 1 %} d-none{% endif %}">
+        <div class="row">
+          <div class="col-12 text-center">
+          </div>
+        </div>
+        <div class="scene scene--card ">
+          <div class="card">
+
+            <div class="card__face card__face--front">
+              <div class="card-title fw-bold">{{ card.category.titre }}</div>
+              <div class="card-body">{{ card.front }}</div>
+            </div>
+            <div class="card__face card__face--back">{{ card.back }}</div>
+          </div>
+        </div>
+        <div>
+          <a href="{{ path('app_card_success', {'id': card.id}) }}" class="btn btn-success" data-id="{{ card.id }}">
+            Réussi
+          </a>
+          <a href="{{ path('app_card_error', {'id': card.id}) }}" class="btn btn-danger" data-id="{{ card.id }}">
+            Échoué
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="end-round d-none">
+
+    </div>
+  </div>
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      const values = [];
+      {% for card in cards %}
+      values.push({{ card.id }})
+      {% endfor %}
+  </script>
+  <script>
+      var cards = document.querySelectorAll('.card');
+
+      [...cards].forEach((card) => {
+          card.addEventListener('click', function () {
+              card.classList.toggle('is-flipped');
+          });
+      });
+
+      function successCard(event) {
+          event.preventDefault();
+          let id = this.dataset.id;
+          let url = this.href;
+          let card = this.parentElement.parentElement;
+          axios.get(url).then(function (response) {
+              if (response.data.code === 200) {
+                {% set cards = cards|slice(1, cards|length) %}
+                  tata.success('Carte', response.data.message, {
+                      position: 'tm'
+                  });
+              } else {
+                  tata.error('Carte', 'La carte est bien passé', {
+                      position: 'tm'
+                  });
+              }
+              card.classList.add("d-none");
+              values.shift();
+              document.getElementsByClassName(values[0])[0].classList.remove('d-none');
+          }).catch(function (error) {
+              if (error.response.status === 403) {
+                  tata.error('Problème', error.response.data.message, {
+                      position: 'tm'
+                  });
+              } else {
+                  tata.error('Problème', 'Une erreur c\'est produit', {
+                      position: 'tm'
+                  });
+              }
+          })
+      }
+
+      function errorCard(event) {
+          event.preventDefault();
+          let id = this.dataset.id;
+          let url = this.href;
+          let card = this.parentElement.parentElement;
+          axios.get(url).then(function (response) {
+              if (response.data.code === 200) {
+                {% set cards = cards|slice(1, cards|length) %}
+                {% set cards = cards|merge([cards.0]) %}
+                  tata.error('Carte', response.data.message, {
+                      position: 'tm'
+                  });
+              } else {
+                  tata.error('Carte', 'La carte est bien passé', {
+                      position: 'tm'
+                  });
+              }
+              card.classList.add("d-none");
+              values.shift()
+              values.push(id)
+              document.getElementsByClassName(values[0])[0].classList.remove('d-none');
+              document.querySelectorAll('.is-flipped').forEach((element) => {
+                  element.classList.remove('is-flipped')
+              });
+          }).catch(function (error) {
+              if (error.response.status === 403) {
+                  tata.error('Problème', error.response.data.message, {
+                      position: 'tm'
+                  });
+              } else {
+                  tata.error('Problème', 'Une erreur c\'est produit', {
+                      position: 'tm'
+                  });
+              }
+          })
+      }
+
+      document.querySelectorAll('a.btn-success').forEach(function (link) {
+          link.addEventListener('click', successCard);
+      })
+      document.querySelectorAll('a.btn-danger').forEach(function (link) {
+          link.addEventListener('click', errorCard);
+      })
+
+  </script>
+{% endblock %}

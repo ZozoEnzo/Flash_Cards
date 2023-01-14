@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center mb-2">
+        <h1>
+          Flash Card
+        </h1>
+      </div>
+      <div class="col-6">
+        <div class="definition mt-3">
+          <h4 class="mb-3">
+            Qu'est-ce qu'une Flash Card ?
+          </h4>
+          <p class="text-justify">
+            La Flash Card est une technique d'apprentissage, avec les bases d'une simple carte.
+            Une carte est composé d'un recto et d'un verso, le but de la Flash Card est de connaître le verso d'une
+            carte où on ne voit que le recto. </br></br>
+            Dans le cas où on ne connait pas le verso, on le découvre une première fois, puis en s'entraînant avec ces
+            cartes, on les apprend au fur et à mesure.
+            En moyenne il faut oublier et apprendre 7 fois quelque chose pour le connaître, aussi l'entrainement des
+            Flash Card va permettre d'apprendre dans un premier les éléments qu'on ne connaît pas encore puis de les
+            réviser au fur et à mesure tout en ajoutant des nouvelles Flash Card.
+          </p>
+        </div>
+      </div>
+      <div class="col-6">
+        <img class="fit-picture" width="100%"
+             src="{{ asset('assets/images/flashcard.png') }}"
+             alt="Flash Card">
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/gestion.css') }}">
+  <style>
+    .card {
+        margin-left: auto;
+        margin-right: auto;
+        width: 350px;
+    }
+  </style>
+{% endblock %}
+{% block body %}
+  {{ dump(user) }}
+  <div class="container mt-3">
+    <div class="row">
+      <div class="pl-2 pr-2 mb-3 card-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+                {{ user.uuid }}
+            </div>
+          </div>
+          <div class="card-body center-block">
+            <div class="row">
+              <a href="#"
+                 class="btn btn-success">Update profil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

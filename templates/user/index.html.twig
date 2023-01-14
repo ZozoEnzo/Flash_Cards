@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/gestion.css') }}">
+  <style>
+      .card {
+          margin-left: auto;
+          margin-right: auto;
+          width: 350px;
+      }
+  </style>
+{% endblock %}
+{% block body %}
+  <div class="container mt-3 text-center">
+    <div class="row text-center">
+      <div class="pl-2 pr-2 mb-3 card-container">
+        <div class="card center-block text-center">
+          <div class="card-header text-center">
+            <div class="row text-center">
+              <span>
+                {{ app.user.uuid }}
+              </span>
+            </div>
+          </div>
+          <div class="card-body center-block">
+            <div class="row">
+              <a href="{{ path('app_user_update') }}" class="btn btn-success">
+                Modifier
+              </a>
+            </div>
+            <div class="row mt-2">
+              <a href="#" class="btn btn-danger">
+                Supprimer mon profil
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

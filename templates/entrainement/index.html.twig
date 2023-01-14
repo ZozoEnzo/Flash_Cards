@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des flash cartes{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/gestion.css') }}">
+{% endblock %}
+{% block body %}
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 text-center center-block mb-3">
+        <a href="#" class="btn btn-training-full">Entrainement full</a>
+      </div>
+      {% for category in categories %}
+        <div class="col-3 pl-2 pr-2 mb-3 card-container">
+          <div class="card">
+            <div class="card-header ">
+              <div class="row">
+                <div class="col-3">
+                  <span class="badge badge-info">{% if category.public == 0 %}Privé{% else %}Public{% endif %}</span>
+                </div>
+                <div class="col-6 text-center title">
+                  {{ category.titre }}
+                </div>
+                <div class="col-3">
+                </div>
+              </div>
+            </div>
+            <div class="card-body center-block text-center">
+              <div class="row">
+                <a href="{{ path('app_entrainement_category', {'id': category.id}) }}" class="btn btn-success">S'entrainer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      function onClickDelete(event) {
+          event.preventDefault();
+          const url = this.href;
+          const card = this.parentElement.parentElement.parentElement.parentElement
+          axios.get(url).then(function (response) {
+              if (response.data.code === 200) {
+                  tata.success(response.data.message, '');
+                  card.classList.add("d-none")
+
+              } else {
+                  tata.error(response.data.message, '');
+              }
+          }).catch(function (error) {
+              if (error.response.status === 403) {
+                  tata.error(error.response.data.message, '');
+              } else {
+                  tata.error('Une erreur c\'est produit', '');
+              }
+          })
+      }
+
+      document.querySelectorAll('a.btn-danger').forEach(function (link) {
+          link.addEventListener('click', onClickDelete);
+      })
+  </script>
+{% endblock %}

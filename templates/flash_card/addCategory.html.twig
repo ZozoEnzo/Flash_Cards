@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Catégorie{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/addCategory.css') }}">
+{% endblock %}
+{% block body %}
+  <div class="login-box">
+    <h2>Ajouter une catégorie</h2>
+    <form method="post">
+      <div class="user-box">
+        {{ form_widget(form.Titre) }}
+        {{ form_label(form.Titre) }}
+      </div>
+      {{ form_row(form.Public) }}
+      {{ form_widget(form._token) }}
+      <button type="submit">
+        Ajouter
+      </button>
+    </form>
+  </div>
+{% endblock %}

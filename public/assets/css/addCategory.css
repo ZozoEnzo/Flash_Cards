@@ -1,0 +1,82 @@
+.select-form {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    font-weight: normal;
+}
+
+.select-form option{
+    color: black;
+    font-weight: normal;
+}
+.select-form:hover option:hover{
+    color: rgb(20,30,48);
+}
+.select-form optgroup{
+    color: grey;
+}
+
+.option-form {
+    background: transparent;
+    color: #68b6ff;
+}
+
+
+select option[value=""] {
+    background: rgb(20,30,48);
+    color: #68b6ff;
+}
+
+
+select option[value="true"] {
+    background: rgb(20,30,48);
+    color: #68b6ff;
+}
+
+select option[value="false"] {
+    background: rgb(20,30,48);
+    color: #68b6ff;
+}
+
+.btn-back {
+    padding: 10px 20px 10px 20px !important;
+    background: none !important;
+    color: #f4033b !important;
+    border: 3px solid !important;
+    font: inherit !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    outline: inherit !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    text-decoration: none !important;
+    text-transform: unset !important;
+    overflow: hidden !important;
+    transition: .5s !important;
+    margin-top: 0 !important;
+    letter-spacing: unset !important;
+}
+
+.btn-back:hover {
+    background: #f4033b !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    border-radius: 5px !important;
+    box-shadow: 0 0 5px #f4033b ,
+    0 0 12px #f4033b ,
+    0 0 25px #f4033b ,
+    0 0 50px #f4033b !important;
+}
+
+.right {
+    right: 0;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: right;
+}

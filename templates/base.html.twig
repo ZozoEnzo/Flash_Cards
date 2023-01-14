@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{{ asset('assets/images/Icone/favicon-256x256.png') }}"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/base.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/menu.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontAwesome.css') }}">
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+  {% endblock %}
+
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark pl-5 pr-5">
+    <div class="hamburger-menu">
+      <input id="menu__toggle" type="checkbox"/>
+      <label class="menu__btn" for="menu__toggle">
+        <span></span>
+      </label>
+
+      <ul class="menu__box">
+        <li><a class="menu__item menu_burger_item" href="{{ path('app_home') }}">Accueil</a></li>
+        {% if app.user %}
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_flash_card') }}">Flash Card</a></li>
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_gestion') }}">Gestion</a></li>
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_category_add') }}">Ajouter une catégorie</a></li>
+        {% endif %}
+        <li><a class="menu__item menu_burger_item" href="{{ path('app_entrainement') }}">S'entrainer</a></li>
+
+        {% if app.user %}
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_user') }}"><i class="fa-solid fa-user mr-3"></i> Profil</a></li>
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_logout') }}">Déconnexion</a></li>
+        {% else %}
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_register') }}">S'enregistrer</a></li>
+          <li><a class="menu__item menu_burger_item" href="{{ path('app_login') }}">Connexion</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <a class="navbar-brand" href="{{ path('app_home') }}">
+      <div class="wrapper">
+        <div class="fill-text">
+          <div class="fill-wrapper">
+            Accueil
+          </div>
+        </div>
+        <div class="text">
+          Accueil
+        </div>
+      </div>
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        {% if app.user %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{{ path('app_flash_card') }}" id="navbarDropdownMenuLink"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="wrapper">
+                <div class="fill-text">
+                  <div class="fill-wrapper">
+                    Flash Card
+                  </div>
+                </div>
+                <div class="text">
+                  Flash Card
+                </div>
+              </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="{{ path('app_gestion') }}">Gestion</a></li>
+              <li><a class="dropdown-item" href="{{ path('app_category_add') }}">Ajouter une catégorie</a></li>
+            </ul>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_entrainement') }}">
+            <div class="wrapper">
+              <div class="fill-text">
+                <div class="fill-wrapper">
+                  S'entrainer
+                </div>
+              </div>
+              <div class="text">
+                S'entrainer
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="right">
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+          {% if app.user %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path('app_user') }}"><i class="fa-solid fa-user mr-3"></i> Profil</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+            </li>
+          {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path('app_register') }}">S'enregistrer</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+{% block body %}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('assets/js/base.js') }}"></script>
+  <script src="{{ asset('assets/js/tata.js') }}"></script>
+  <script src="{{ asset('assets/js/fontAwesome.js') }}"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+              crossorigin="anonymous"></script>
+  {{ encore_entry_script_tags('app') }}
+
+  <script type="text/javascript">
+      //tata.success('Hello World', '')
+  </script>
+{% endblock %}
+</body>
+</html>
