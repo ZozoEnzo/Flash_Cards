@@ -22,7 +22,6 @@ class UserController extends AbstractController
      */
     public function updateUser(): Response
     {
-        dd('ok');
         return $this->render('security/profil.html.twig', ['user' => $this->getUser()]);
     }
 }
