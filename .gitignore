@@ -19,5 +19,10 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+# PhpStorm #
+/.idea/
+
 # Project exclude paths
 /node_modules/
+
+/composer.lock
